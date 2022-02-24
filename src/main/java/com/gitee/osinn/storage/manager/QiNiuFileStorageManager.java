@@ -91,6 +91,7 @@ public class QiNiuFileStorageManager extends AbstractManager implements FileStor
         String extName = FileUtil.extName(file.getOriginalFilename());
         upResult.setFileSize(file.getSize());
         upResult.setFileName(fileName);
+        upResult.setOlbFileName(file.getOriginalFilename());
         upResult.setExtFileName(extName);
         upResult.setRelativePath(fileRelativePath);
         upResult.setFullFilePath(properties.getQiNiu().getDomain() + FileUtil.UNIX_SEPARATOR + fileRelativePath);
@@ -126,6 +127,7 @@ public class QiNiuFileStorageManager extends AbstractManager implements FileStor
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
+            error404(response, properties.isOutErrorHtml());
         } finally {
             if (inputStream != null) {
                 try {
@@ -174,6 +176,7 @@ public class QiNiuFileStorageManager extends AbstractManager implements FileStor
             String extName = FileUtil.extName(file.getName());
             upResult.setFileSize(file.length());
             upResult.setFileName(file.getName());
+            upResult.setOlbFileName(file.getName());
             upResult.setExtFileName(extName);
             upResult.setRelativePath(relativePath);
             upResult.setFullFilePath(properties.getQiNiu().getDomain() + FileUtil.UNIX_SEPARATOR + relativePath);

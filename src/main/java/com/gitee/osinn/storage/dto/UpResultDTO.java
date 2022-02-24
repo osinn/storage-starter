@@ -23,6 +23,11 @@ public class UpResultDTO implements Serializable {
     public String fileName;
 
     /**
+     * 原始文件名称
+     */
+    public String olbFileName;
+
+    /**
      * 扩展名称
      */
     public String extFileName;

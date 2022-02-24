@@ -62,6 +62,7 @@ public class LocalFileStorageManager extends AbstractManager implements FileStor
             UpResultDTO upResult = new UpResultDTO();
             upResult.setFileSize(file.getSize());
             upResult.setFileName(fileName);
+            upResult.setOlbFileName(file.getOriginalFilename());
             upResult.setExtFileName(extName);
             upResult.setRelativePath(fileRelativePath);
             upResult.setFullFilePath(uploadDir + File.separator + fileRelativePath);
