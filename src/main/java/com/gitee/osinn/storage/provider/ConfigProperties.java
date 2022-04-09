@@ -64,6 +64,11 @@ public class ConfigProperties {
     public static class Local {
 
         /**
+         * 启用
+         */
+        private boolean enable;
+
+        /**
          * 保存文件路径名
          */
         private String pathName;
@@ -84,6 +89,11 @@ public class ConfigProperties {
      */
     @Data
     public static class QiNiuCloud {
+
+        /**
+         * 启用
+         */
+        private boolean enable;
 
         /**
          * 账号的access_key

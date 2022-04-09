@@ -25,6 +25,8 @@ file:
   storage:
     # 本地存储配置
     local:
+      # 启用本地存储配置
+      enable: true
       # 本地文件存储绝对路径
       path-name: /Users/dev/tmp/storage
       # 存到本地服务器后是否推送到七牛云
@@ -33,6 +35,8 @@ file:
       domain: http://xxx.nginx.com
     # 七牛云存储配置
     qi-niu:
+      # 启用七牛云存储配置
+      enable: true
       access-key: 你的七牛云access-key
       secret-key: 你的七牛云secret-key
       bucket: 你的七牛云存储空间(桶)

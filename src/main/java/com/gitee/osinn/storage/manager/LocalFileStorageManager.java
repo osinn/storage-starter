@@ -50,6 +50,11 @@ public class LocalFileStorageManager extends AbstractManager implements FileStor
 
     @Override
     public UpResultDTO upload(MultipartFile file) throws StorageException {
+        return this.upload(file, null);
+    }
+
+    @Override
+    public UpResultDTO upload(MultipartFile file, String model) throws StorageException {
         if (StringUtils.isEmpty(uploadDir)) {
             throw new StorageException("文件保存路径为空");
         }
@@ -57,7 +62,7 @@ public class LocalFileStorageManager extends AbstractManager implements FileStor
             validityFile(file, properties);
             String extName = FileUtil.extName(file.getOriginalFilename());
             String fileName = FileUtil.encodingFileName(file.getOriginalFilename());
-            String fileRelativePath = FileUtil.fileRelativePath(fileName);
+            String fileRelativePath = getModelName(model) + FileUtil.fileRelativePath(fileName);
             File newFile = getAbsoluteFile(fileRelativePath);
             UpResultDTO upResult = new UpResultDTO();
             upResult.setFileSize(file.getSize());

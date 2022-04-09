@@ -25,11 +25,21 @@ public interface FileStorageManager {
     /**
      * 上传文件
      *
-     * @param file
+     * @param file 上传文件
      * @return
      * @throws StorageException
      */
     UpResultDTO upload(MultipartFile file) throws StorageException;
+
+    /**
+     * 上传文件
+     *
+     * @param file  上传文件
+     * @param model 保存模块文件夹名称
+     * @return
+     * @throws StorageException
+     */
+    UpResultDTO upload(MultipartFile file, String model) throws StorageException;
 
     /**
      * 本地文件推送到云存储
