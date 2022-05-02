@@ -74,7 +74,13 @@ public class QiNiuFileStorageManager extends AbstractManager implements FileStor
     public UpResultDTO upload(MultipartFile file, String key) throws StorageException {
         validityFile(file, properties);
         String fileName = FileUtil.encodingFileName(file.getOriginalFilename());
-        String fileRelativePath = getModelName(key) + FileUtil.fileRelativePath(fileName);
+        String modelName = getModelName(key);
+        String fileRelativePath;
+        if(StringUtils.isNotBlank(modelName)) {
+            fileRelativePath = modelName + FileUtil.UNIX_SEPARATOR + FileUtil.fileRelativePath(fileName);;
+        } else {
+            fileRelativePath = FileUtil.fileRelativePath(fileName);
+        }
         UpResultDTO upResult = new UpResultDTO();
         try {
             if (properties.isAsyncUpload()) {

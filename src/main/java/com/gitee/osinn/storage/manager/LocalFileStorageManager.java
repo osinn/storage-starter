@@ -60,9 +60,15 @@ public class LocalFileStorageManager extends AbstractManager implements FileStor
         }
         try {
             validityFile(file, properties);
-            String extName = FileUtil.extName(file.getOriginalFilename());
             String fileName = FileUtil.encodingFileName(file.getOriginalFilename());
-            String fileRelativePath = getModelName(model) + FileUtil.fileRelativePath(fileName);
+            String extName = FileUtil.extName(file.getOriginalFilename());
+            String modelName = getModelName(model);
+            String fileRelativePath;
+            if(StringUtils.isNotBlank(modelName)) {
+                fileRelativePath = modelName + FileUtil.UNIX_SEPARATOR + FileUtil.fileRelativePath(fileName);;
+            } else {
+                fileRelativePath = FileUtil.fileRelativePath(fileName);
+            }
             File newFile = getAbsoluteFile(fileRelativePath);
             UpResultDTO upResult = new UpResultDTO();
             upResult.setFileSize(file.getSize());

@@ -34,11 +34,7 @@ public abstract class AbstractManager {
     }
 
     public String getModelName(String model) {
-        if(StringUtils.isNotBlank(model)) {
-            return File.separator + model;
-        } else  {
-            return "";
-        }
+        return StringUtils.isNotBlank(model) ? model : FileUtil.EMPTY;
     }
 
     /**
