@@ -11,10 +11,10 @@
   - 下载文件
   - 删除文件
 # 快速开始
-- 引入以下依赖(未发布到maven中央仓库)
+- 引入以下依赖
 ```
 <dependency>
-    <groupId>com.gitee.osinn</groupId>
+    <groupId>io.github.osinn</groupId>
     <artifactId>storage-starter</artifactId>
     <version>1.0</version>
 </dependency>

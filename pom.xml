@@ -8,8 +8,8 @@
         <version>2.1.0.RELEASE</version>
         <relativePath/>
     </parent>
-    <groupId>com.github.osinn</groupId>
-    <artifactId>spring-storage-starter</artifactId>
+    <groupId>io.github.osinn</groupId>
+    <artifactId>storage-starter</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
     <name>storage-starter</name>
@@ -112,13 +112,13 @@
             <version>1.15</version>
         </dependency>
         <!--        <dependency>-->
-<!--            <groupId>cn.hutool</groupId>-->
-<!--            <artifactId>hutool-all</artifactId>-->
-<!--            <version>5.7.2</version>-->
-<!--            <scope>compile</scope>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
-<!-- -->
+        <!--            <groupId>cn.hutool</groupId>-->
+        <!--            <artifactId>hutool-all</artifactId>-->
+        <!--            <version>5.7.2</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--            <optional>true</optional>-->
+        <!--        </dependency>-->
+        <!-- -->
     </dependencies>
 
     <repositories>
@@ -156,24 +156,24 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-<!--                <version>2.9.1</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>attach-javadoc</id>-->
-<!--                        <goals>-->
-<!--                            <goal>jar</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--                <configuration>-->
-<!--                    <charset>UTF-8</charset>-->
-<!--                    <encoding>UTF-8</encoding>-->
-<!--                    <docencoding>UTF-8</docencoding>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadoc</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
