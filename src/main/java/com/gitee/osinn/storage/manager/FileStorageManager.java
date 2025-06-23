@@ -2,10 +2,8 @@ package com.gitee.osinn.storage.manager;
 
 import com.gitee.osinn.storage.dto.UpResultDTO;
 import com.gitee.osinn.storage.exception.StorageException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletResponse;
-
 
 /**
  * 文件存储管理

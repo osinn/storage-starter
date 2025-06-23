@@ -4,6 +4,7 @@ import com.gitee.osinn.storage.dto.UpResultDTO;
 import com.gitee.osinn.storage.exception.StorageException;
 import com.gitee.osinn.storage.provider.ConfigProperties;
 import com.gitee.osinn.storage.utils.FileUtil;
+import com.gitee.osinn.storage.utils.OkHttpUtil;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
@@ -11,6 +12,7 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -18,7 +20,6 @@ import okhttp3.ResponseBody;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -112,7 +113,7 @@ public class QiNiuFileStorageManager extends AbstractManager implements FileStor
 
     @Override
     public void downloadFile(HttpServletResponse response, String url) {
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = OkHttpUtil.getOkHttpClient();
         System.out.println(url);
         Request req = new Request.Builder().url(url).build();
         okhttp3.Response resp = null;

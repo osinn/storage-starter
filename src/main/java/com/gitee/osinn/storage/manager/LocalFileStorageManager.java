@@ -4,11 +4,11 @@ import com.gitee.osinn.storage.dto.UpResultDTO;
 import com.gitee.osinn.storage.exception.StorageException;
 import com.gitee.osinn.storage.provider.ConfigProperties;
 import com.gitee.osinn.storage.utils.FileUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 /**
