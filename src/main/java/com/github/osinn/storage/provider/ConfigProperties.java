@@ -1,6 +1,6 @@
-package io.github.osinn.storage.provider;
+package com.github.osinn.storage.provider;
 
-import io.github.osinn.storage.enums.QiNiuEnums;
+import com.github.osinn.storage.enums.QiNiuEnums;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -1,4 +1,4 @@
-package io.github.osinn.storage.utils;
+package com.github.osinn.storage.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.DigestUtils;

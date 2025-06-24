@@ -1,7 +1,7 @@
-package io.github.osinn.storage.manager;
+package com.github.osinn.storage.manager;
 
-import io.github.osinn.storage.provider.ConfigProperties;
-import io.github.osinn.storage.utils.FileUtil;
+import com.github.osinn.storage.utils.FileUtil;
+import com.github.osinn.storage.provider.ConfigProperties;
 import jakarta.servlet.http.HttpServletResponse;
 import kotlin.text.Charsets;
 import lombok.extern.slf4j.Slf4j;

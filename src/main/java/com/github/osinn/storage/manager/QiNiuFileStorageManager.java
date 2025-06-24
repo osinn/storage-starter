@@ -1,10 +1,10 @@
-package io.github.osinn.storage.manager;
+package com.github.osinn.storage.manager;
 
-import io.github.osinn.storage.dto.UpResultDTO;
-import io.github.osinn.storage.exception.StorageException;
-import io.github.osinn.storage.provider.ConfigProperties;
-import io.github.osinn.storage.utils.FileUtil;
-import io.github.osinn.storage.utils.OkHttpUtil;
+import com.github.osinn.storage.dto.UpResultDTO;
+import com.github.osinn.storage.utils.FileUtil;
+import com.github.osinn.storage.utils.OkHttpUtil;
+import com.github.osinn.storage.exception.StorageException;
+import com.github.osinn.storage.provider.ConfigProperties;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;

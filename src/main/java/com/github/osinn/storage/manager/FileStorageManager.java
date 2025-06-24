@@ -1,7 +1,7 @@
-package io.github.osinn.storage.manager;
+package com.github.osinn.storage.manager;
 
-import io.github.osinn.storage.dto.UpResultDTO;
-import io.github.osinn.storage.exception.StorageException;
+import com.github.osinn.storage.dto.UpResultDTO;
+import com.github.osinn.storage.exception.StorageException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 

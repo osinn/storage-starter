@@ -1,4 +1,4 @@
-package io.github.osinn.storage.dto;
+package com.github.osinn.storage.dto;
 
 import lombok.Data;
 
