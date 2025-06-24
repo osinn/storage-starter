@@ -1,18 +1,15 @@
-package com.gitee.osinn.storage.manager;
+package io.github.osinn.storage.manager;
 
-import com.gitee.osinn.storage.provider.ConfigProperties;
-import com.gitee.osinn.storage.utils.FileUtil;
-import com.google.common.base.Charsets;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
+import io.github.osinn.storage.provider.ConfigProperties;
+import io.github.osinn.storage.utils.FileUtil;
 import jakarta.servlet.http.HttpServletResponse;
+import kotlin.text.Charsets;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 /**
@@ -22,18 +19,18 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 public abstract class AbstractManager {
 
 
-    protected ListeningExecutorService executorService;
+    protected ScheduledThreadPoolExecutor executorService;
 
     AbstractManager() {
 
     }
 
     AbstractManager(int corePoolSize) {
-        executorService = MoreExecutors.listeningDecorator(new ScheduledThreadPoolExecutor(corePoolSize));
+        executorService = new ScheduledThreadPoolExecutor(corePoolSize);
     }
 
     public String getModelName(String model) {
-        return StringUtils.isNotBlank(model) ? model : FileUtil.EMPTY;
+        return model != null && model.length() > 0 ? model : FileUtil.EMPTY;
     }
 
     /**
@@ -61,7 +58,7 @@ public abstract class AbstractManager {
     public void validityFile(MultipartFile file, ConfigProperties properties) {
         String extensionFilename = FileUtil.extName(file.getOriginalFilename());
         if (properties.getDefaultAllowedExtension() != null && !properties.getDefaultAllowedExtension().contains(extensionFilename)) {
-            throw new RuntimeException("只允许" + ArrayUtils.toString(properties.getDefaultAllowedExtension()) + "文件上传");
+            throw new RuntimeException("只允许" + String.join(", ", properties.getDefaultAllowedExtension()) + "文件上传");
         }
         if (file.getSize() > properties.getDefaultMaxSize()) {
             throw new RuntimeException("文件过大");
@@ -77,7 +74,7 @@ public abstract class AbstractManager {
             return;
         }
         try {
-            response.setCharacterEncoding(Charsets.UTF_8.toString());
+            response.setCharacterEncoding(StandardCharsets.UTF_8.name());
             PrintWriter pw = response.getWriter();
             String html = "<!DOCTYPE html>" +
                     "<html lang=\"zh-CN\"><title>未找到资源</title><body>" +

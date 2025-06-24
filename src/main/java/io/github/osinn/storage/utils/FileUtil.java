@@ -1,11 +1,12 @@
-package com.gitee.osinn.storage.utils;
+package io.github.osinn.storage.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
+import org.springframework.util.DigestUtils;
 
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 
 /**
@@ -25,12 +26,13 @@ public class FileUtil {
     public static final String EMPTY = "";
     public static final String DOT = ".";
 
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
      * 生成文件文件名称且相对路径
      */
     public static String encodingFileNameRelativePath(String fileName) {
-        fileName = DateFormatUtils.format(new Date(), "yyyy-MM-dd") + UNIX_SEPARATOR + encodingFileName(fileName);
+        fileName = DATE_FORMAT.format(new Date()) + UNIX_SEPARATOR + encodingFileName(fileName);
         return fileName;
     }
 
@@ -39,7 +41,7 @@ public class FileUtil {
      * 根据文件名称生成文件相对路径
      */
     public static String fileRelativePath(String fileName) {
-        fileName = DateFormatUtils.format(new Date(), "yyyy-MM-dd") + UNIX_SEPARATOR + fileName;
+        fileName = DATE_FORMAT.format(new Date()) + UNIX_SEPARATOR + fileName;
         return fileName;
     }
 
@@ -48,7 +50,7 @@ public class FileUtil {
      */
     public static String encodingFileName(String fileName) {
         fileName = fileName.replace("_", " ");
-        fileName = DigestUtils.md5Hex(fileName + System.nanoTime() + RandomStringUtils.randomNumeric(6)) + DOT + extName(fileName);
+        fileName = Arrays.toString(DigestUtils.md5Digest((fileName + System.nanoTime() + generateSecure(6)).getBytes())) + DOT + extName(fileName);
         return fileName;
     }
 
@@ -118,7 +120,7 @@ public class FileUtil {
      * @return
      */
     public static String delLastChar(String fileName, char... lastChar) {
-        if (StringUtils.isEmpty(fileName)) {
+        if (fileName == null || fileName.length() == 0) {
             return EMPTY;
         }
 
@@ -139,7 +141,7 @@ public class FileUtil {
      * @return
      */
     public static String delFirstChar(String fileName, char... lastChar) {
-        if (StringUtils.isEmpty(fileName)) {
+        if (fileName == null || fileName.length() == 0) {
             return EMPTY;
         }
         for (char c : lastChar) {
@@ -159,7 +161,7 @@ public class FileUtil {
      * @since 4.1.11
      */
     public static boolean containsAny(CharSequence str, char... chars) {
-        if (StringUtils.isNotEmpty(str)) {
+        if (str != null && chars.length > 0) {
             int len = str.length();
             for (int i = 0; i < len; i++) {
                 if (indexOf(chars, str.charAt(i)) > -1) {
@@ -187,5 +189,13 @@ public class FileUtil {
             }
         }
         return -1;
+    }
+
+    public static String generateSecure(int length) {
+        SecureRandom random = new SecureRandom();
+        byte[] bytes = new byte[length];
+        random.nextBytes(bytes);
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes)
+                .substring(0, length);
     }
 }

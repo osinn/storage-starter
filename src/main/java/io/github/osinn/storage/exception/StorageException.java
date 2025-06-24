@@ -1,4 +1,4 @@
-package com.gitee.osinn.storage.exception;
+package io.github.osinn.storage.exception;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 

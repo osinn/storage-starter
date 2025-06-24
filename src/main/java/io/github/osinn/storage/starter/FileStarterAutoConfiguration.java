@@ -1,9 +1,9 @@
-package com.gitee.osinn.storage.starter;
+package io.github.osinn.storage.starter;
 
-import com.gitee.osinn.storage.manager.FileStorageManager;
-import com.gitee.osinn.storage.manager.LocalFileStorageManager;
-import com.gitee.osinn.storage.provider.ConfigProperties;
-import com.gitee.osinn.storage.manager.QiNiuFileStorageManager;
+import io.github.osinn.storage.manager.FileStorageManager;
+import io.github.osinn.storage.manager.LocalFileStorageManager;
+import io.github.osinn.storage.provider.ConfigProperties;
+import io.github.osinn.storage.manager.QiNiuFileStorageManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

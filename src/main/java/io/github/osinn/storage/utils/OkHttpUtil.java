@@ -1,4 +1,4 @@
-package com.gitee.osinn.storage.utils;
+package io.github.osinn.storage.utils;
 
 import okhttp3.*;
 

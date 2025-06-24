@@ -1,10 +1,10 @@
-package com.gitee.osinn.storage.manager;
+package io.github.osinn.storage.manager;
 
-import com.gitee.osinn.storage.dto.UpResultDTO;
-import com.gitee.osinn.storage.exception.StorageException;
-import com.gitee.osinn.storage.provider.ConfigProperties;
-import com.gitee.osinn.storage.utils.FileUtil;
-import com.gitee.osinn.storage.utils.OkHttpUtil;
+import io.github.osinn.storage.dto.UpResultDTO;
+import io.github.osinn.storage.exception.StorageException;
+import io.github.osinn.storage.provider.ConfigProperties;
+import io.github.osinn.storage.utils.FileUtil;
+import io.github.osinn.storage.utils.OkHttpUtil;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
@@ -12,12 +12,12 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
+import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;

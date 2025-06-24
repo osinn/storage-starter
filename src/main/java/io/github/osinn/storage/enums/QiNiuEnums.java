@@ -1,4 +1,4 @@
-package com.gitee.osinn.storage.enums;
+package io.github.osinn.storage.enums;
 
 import com.qiniu.storage.Region;
 import lombok.Getter;
