@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.github.osinn</groupId>
     <artifactId>storage-starter</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
     <name>storage-starter</name>
     <description>storage-starter</description>
@@ -48,7 +48,7 @@
         <guava.version>33.4.8-jre</guava.version>
         <commons-lang3.version>3.17.0</commons-lang3.version>
         <okhttp.version>4.12.0</okhttp.version>
-        <qiniu-java-sdk.version>7.10.2</qiniu-java-sdk.version>
+        <qiniu-java-sdk.version>[7.19.0, 7.19.99]</qiniu-java-sdk.version>
     </properties>
 
     <dependencies>
@@ -82,12 +82,17 @@
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>${okhttp.version}</version>
-            <optional>true</optional>
         </dependency>
         <!--七牛云上传-->
         <dependency>
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                </exclusion>
+            </exclusions>
             <version>${qiniu-java-sdk.version}</version>
         </dependency>
     </dependencies>
