@@ -152,56 +152,6 @@ public class QiNiuFileStorageManager extends AbstractManager implements FileStor
     }
 
     @Override
-    public UpResultDTO localUploadCloud(String filePath, String relativePath, boolean asyncUpload) throws StorageException {
-        File file = new File(filePath);
-        if (!file.isFile()) {
-            throw new StorageException("推送云存储本地文件不存在");
-        }
-        UpResultDTO upResult = new UpResultDTO();
-        try {
-            if (StringUtils.isEmpty(relativePath)) {
-                relativePath = FileUtil.fileRelativePath(file.getName());
-            }
-            if (asyncUpload) {
-                String finalRelativePath = relativePath;
-                executorService.submit(() -> {
-                    Response response = null;
-                    try {
-                        response = uploadManager.put(filePath, finalRelativePath, this.getToken());
-                        if (response.statusCode != 200) {
-                            log.error("本地上传七牛云错误，状态码：{},错误信息：{}", response.statusCode, response.error);
-                        }
-                    } catch (QiniuException e) {
-                        response = e.response;
-                        log.error("本地上传七牛云错误，状态码：{},错误信息：{}", response.statusCode, response.error);
-                    } catch (Exception e) {
-                        log.error(e.getMessage(), e);
-                    }
-                });
-            } else {
-                Response response = uploadManager.put(filePath, relativePath, this.getToken());
-                upResult.setReturnBody(response.bodyString());
-                if (response.statusCode != 200) {
-                    throw new StorageException(response.statusCode, response.error);
-                }
-            }
-            String extName = FileUtil.extName(file.getName());
-            upResult.setFileSize(file.length());
-            upResult.setFileName(file.getName());
-            upResult.setOlbFileName(file.getName());
-            upResult.setExtFileName(extName);
-            upResult.setRelativePath(relativePath);
-            upResult.setFullFilePath(properties.getQiNiu().getDomain() + FileUtil.UNIX_SEPARATOR + relativePath);
-            upResult.setDomain(properties.getQiNiu().getDomain());
-            return upResult;
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            throw new StorageException(e.getMessage());
-        }
-
-    }
-
-    @Override
     public String getToken() {
         return auth.uploadToken(properties.getQiNiu().getBucket(),
                 null,

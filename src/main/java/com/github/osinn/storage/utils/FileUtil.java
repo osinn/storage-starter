@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author wency_cai
@@ -41,7 +42,7 @@ public class FileUtil {
      * 根据文件名称生成文件相对路径
      */
     public static String fileRelativePath(String fileName) {
-        fileName = DATE_FORMAT.format(new Date()) + UNIX_SEPARATOR + fileName;
+        fileName = UNIX_SEPARATOR + fileName;
         return fileName;
     }
 
@@ -49,8 +50,7 @@ public class FileUtil {
      * 生成新的文件名
      */
     public static String encodingFileName(String fileName) {
-        fileName = fileName.replace("_", " ");
-        fileName = Arrays.toString(DigestUtils.md5Digest((fileName + System.nanoTime() + generateSecure(6)).getBytes())) + DOT + extName(fileName);
+        fileName = UUID.randomUUID().toString().replace("-", "") + DOT + extName(fileName);
         return fileName;
     }
 

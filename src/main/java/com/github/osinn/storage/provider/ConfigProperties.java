@@ -74,11 +74,6 @@ public class ConfigProperties {
         private String pathName;
 
         /**
-         * 是否上传之七牛云
-         */
-        private boolean toQiNiu;
-
-        /**
          * 域名(包含http://或https://)
          */
         private String domain;

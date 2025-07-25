@@ -23,7 +23,7 @@ public class FileStarterAutoConfiguration {
     @Bean
     @ConditionalOnProperty(name = "enable", prefix = ConfigProperties.PREFIX + ".local", havingValue = "true")
     public FileStorageManager localFileStorageManager(ConfigProperties properties) {
-        return new LocalFileStorageManager(properties, qiNiuFileStorageManager(properties));
+        return new LocalFileStorageManager(properties);
     }
 
     @Bean

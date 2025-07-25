@@ -52,9 +52,4 @@ public class UpResultDTO implements Serializable {
      */
     private String returnBody;
 
-    /**
-     * 本地存储推送的云存储，带回推送云存储接口返回的数据
-     */
-    private UpResultDTO cloudUpResult;
-
 }

@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * 本地存储
@@ -21,17 +23,15 @@ public class LocalFileStorageManager extends AbstractManager implements FileStor
 
     private final ConfigProperties properties;
 
-    private final FileStorageManager qiNiuFileStorageManager;
     /**
      * 保存文件路径名
      */
     private final String uploadDir;
 
-    public LocalFileStorageManager(ConfigProperties properties, FileStorageManager qiNiuFileStorageManager) {
+    public LocalFileStorageManager(ConfigProperties properties) {
         super(properties.getCorePoolSize());
         this.properties = properties;
         this.uploadDir = FileUtil.delLastChar(properties.getLocal().getPathName(), FileUtil.UNIX_SEPARATOR, FileUtil.WINDOWS_SEPARATOR);
-        this.qiNiuFileStorageManager = qiNiuFileStorageManager;
     }
 
     @Override
@@ -60,15 +60,15 @@ public class LocalFileStorageManager extends AbstractManager implements FileStor
         }
         try {
             validityFile(file, properties);
+            String datePath = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
             String fileName = FileUtil.encodingFileName(file.getOriginalFilename());
             String extName = FileUtil.extName(file.getOriginalFilename());
             String modelName = getModelName(model);
             String fileRelativePath;
             if (StringUtils.isNotBlank(modelName)) {
-                fileRelativePath = modelName + FileUtil.UNIX_SEPARATOR + FileUtil.fileRelativePath(fileName);
-                ;
+                fileRelativePath = modelName + File.separator + datePath + File.separator + FileUtil.fileRelativePath(fileName);
             } else {
-                fileRelativePath = FileUtil.fileRelativePath(fileName);
+                fileRelativePath = datePath + File.separator + FileUtil.fileRelativePath(fileName);
             }
             File newFile = getAbsoluteFile(fileRelativePath);
             UpResultDTO upResult = new UpResultDTO();
@@ -80,10 +80,6 @@ public class LocalFileStorageManager extends AbstractManager implements FileStor
             upResult.setFullFilePath(uploadDir + File.separator + fileRelativePath);
             upResult.setDomain(properties.getLocal().getDomain());
             file.transferTo(newFile);
-            if (properties.getLocal().isToQiNiu()) {
-                UpResultDTO cloudUpResult = this.localUploadCloud(upResult.getFullFilePath(), upResult.getRelativePath(), properties.isAsyncUpload());
-                upResult.setCloudUpResult(cloudUpResult);
-            }
             return upResult;
         } catch (Exception e) {
             throw new StorageException(e.getMessage());
@@ -129,11 +125,6 @@ public class LocalFileStorageManager extends AbstractManager implements FileStor
         } else {
             error404(response, properties.isOutErrorHtml());
         }
-    }
-
-    @Override
-    public UpResultDTO localUploadCloud(String filePath, String relativePath, boolean asyncUpload) throws StorageException {
-        return qiNiuFileStorageManager.localUploadCloud(filePath, relativePath, asyncUpload);
     }
 
     @Override

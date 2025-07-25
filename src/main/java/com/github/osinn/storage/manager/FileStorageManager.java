@@ -40,16 +40,6 @@ public interface FileStorageManager {
     UpResultDTO upload(MultipartFile file, String model) throws StorageException;
 
     /**
-     * 本地文件推送到云存储
-     *
-     * @param filePath     文件本地绝对路径
-     * @param relativePath 文件本地相对路径，空则自动生成云存储相对路径
-     * @return
-     * @throws StorageException
-     */
-    UpResultDTO localUploadCloud(String filePath, String relativePath, boolean asyncUpload) throws StorageException;
-
-    /**
      * 下载文件
      *
      * @param response
